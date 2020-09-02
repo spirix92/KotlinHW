@@ -9,10 +9,13 @@ class MainViewModel : ViewModel() {
     private val clickLiveData: MutableLiveData<Int> = MutableLiveData()
     private val model = MainModel()
 
+    init {
+        model.getLiveData().observeForever { value -> clickLiveData.value = value }
+    }
 
     fun getViewState(): LiveData<Int> = clickLiveData
 
     fun addCount() {
-        clickLiveData.value = model.addCount()
+        model.addCount()
     }
 }
